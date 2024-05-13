@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Page - Grade X</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Discussion Page - Grade X</h1>
+
+    <div id="discussion-container">
+        <!-- Discussion posts will be displayed here -->
+    </div>
+
+    <form id="discussion-form">
+        <input type="text" id="username" name="username" placeholder="Your Name" required><br>
+        <textarea id="message" name="message" placeholder="Write your message" required></textarea><br>
+        <button type="submit">Post</button>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Load discussions
+            $.getJSON("discussion.php", function(data){
+                $.each(data, function(index, discussion){
+                    $("#discussion-container").append("<p><strong>" + discussion.username + "</strong>: " + discussion.message + "</p>");
+                });
+            });
+
+            // Handle form submission
+            $("#discussion-form").submit(function(event){
+                event.preventDefault();
+
+                var formData = $(this).serialize();
+                $.post("discussion.php", formData, function(){
+                    // Reload discussions
+                    $("#discussion-container").empty();
+                    $.getJSON("discussion.php", function(data){
+                        $.each(data, function(index, discussion){
+                            $("#discussion-container").append("<p><strong>" + discussion.username + "</strong>: " + discussion.message + "</p>");
+                        });
+                    });
+                });
+
+                // Clear form fields
+                $(this).trigger("reset");
+            });
+        });
+    </script>
+</body>
+</html>

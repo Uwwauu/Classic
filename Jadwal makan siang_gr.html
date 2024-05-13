@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Makan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: blanchedalmond;
+        }
+        .header {
+            background-color: #f9f9f9;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .jadwal {
+            max-width: 60%;
+            height: auto;
+            margin-top: 5px auto;
+        }
+        .start-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .image-picker {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .image-picker input[type="file"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>Classic</h1>
+    </div>
+    <h1>Jadwal Makan Siang</h1>
+    <img src="Makansiang.jpeg" alt="Jadwal" class="jadwal" id="jadwal-image">
+    <form action="Menu_gr.html" method="post">
+        <button class="start-button">Back to Menu</button>
+    </form>
+    <div class="image-picker">
+        <input type="file" id="image-input" accept="image/*" onchange="displayImage()">
+        <label for="image-input">Choose Image</label>
+    </div>
+
+    <script>
+        function displayImage() {
+            var input = document.getElementById('image-input');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('jadwal-image').src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>

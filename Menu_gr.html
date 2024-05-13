@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #f9f9f9;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+        }
+        .menu-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .menu-group {
+            margin-bottom: 30px;
+        }
+        .menu-group h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .menu-items {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s ease;
+            width: 150px;
+        }
+        .menu-item:hover {
+            background-color: #0056b3;
+        }
+        .menu-item i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .menu-item span {
+            font-size: 16px;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .menu-item {
+                width: 100%;
+            }
+        }
+        .back-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>Classic</h1>
+    </div>
+    <div class="menu-container">
+        <div class="menu-group">
+            <h2>Menu Utama</h2>
+            <div class="menu-items">
+                <a href="pengingat_gr.html" class="menu-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Pengingat</span>
+                </a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <h2>Menu Lainnya</h2>
+            <div class="menu-items">
+                <a href="Jadwal_gr.html" class="menu-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Jadwal</span>
+                </a>
+                <a href="Kaldik_gr.html" class="menu-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Kalender Didik</span>
+                </a>
+                <a href="Jadwal makan siang_gr.html" class="menu-item">
+                    <i class="fas fa-utensils"></i>
+                    <span>Jadwal Makan Siang</span>
+                </a>
+            </div>
+        </div>
+        <div>
+            <form action="Login.html" method="post">
+                <button class="back-button">Back To Login Page</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

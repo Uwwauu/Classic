@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: blanchedalmond;
+        }
+        .header {
+            background-color: #f9f9f9;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .jadwal {
+            max-width: 100%; /* Adjusted to fit the container */
+            height: auto ;
+            margin-top: 5px, auto;
+        }
+        .start-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .image-picker {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .image-picker input[type="file"] {
+            display: none;
+        }
+        .image-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column; /* Change to column */
+            align-items: center; /* Align images in the center */
+        }
+        .image-container img {
+            width: 100%; /* Adjusted to fit the container */
+            max-width: 600px; /* Increased maximum width */
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>Classic</h1>
+    </div>
+    <h1>Jadwal</h1>
+    <div class="image-container">
+        <img src="Jadwal1.png" alt="Jadwal" class="jadwal">
+        <img src="Jadwal2.png" alt="Jadwal" class="jadwal">
+        <img src="Jadwal3.png" alt="Jadwal" class="jadwal">
+    </div>
+    <form action="Menu_gr.html" method="post">
+        <button class="start-button">Back to Menu</button>
+    </form>
+    <div class="image-picker">
+        <input type="file" id="image-input" accept="image/*" multiple onchange="displayImages()">
+        <label for="image-input">Choose Images</label>
+    </div>
+
+    <script>
+        function displayImages() {
+            var input = document.getElementById('image-input');
+            var container = document.querySelector('.image-container');
+            container.innerHTML = '';
+
+            if (input.files && input.files.length > 0) {
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var image = document.createElement('img');
+                        image.src = e.target.result;
+                        container.appendChild(image);
+                    };
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Reminder Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('Background 1.jpeg'); /* Replace 'background-image.jpg' with the path to your image */
+            background-size: cover;
+            background-position: center;
+            
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff; /* White container */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative; /* Added for positioning the "Back to Login Page" button */
+        }
+
+        h2 {
+            color: #000; /* Black font */
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input[type="submit"],
+        .back-to-login {
+            background-color: #007bff; /* Azure color */
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover,
+        .back-to-login:hover {
+            background-color: #0056b3;
+        }
+
+        .task-list {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+
+        .task {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .task p {
+            margin: 0;
+        }
+
+        .task-buttons {
+            text-align: right;
+        }
+
+        .task-buttons button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .task-buttons button.delete {
+            background-color: #dc3545; /* Red */
+            border: none;
+            color: white;
+        }
+
+        .task-buttons button.done {
+            background-color: #28a745; /* Green */
+            border: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Task Reminder Application</h2>
+        <form id="taskForm">
+            <label for="taskName">Task Name:</label>
+            <input type="text" id="taskName" name="taskName" required>
+            
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <label for="remindBefore">Remind Before (Days):</label>
+            <input type="number" id="remindBefore" name="remindBefore" min="0">
+            
+            <label for="remindTime">Remind at This Time:</label>
+            <input type="time" id="remindTime" name="remindTime">
+            
+            <label for="notification">Remind Via Notification:</label>
+            <input type="checkbox" id="notification" name="notification">
+            
+            <label for="subject">Subject:</label>
+            <select id="subject" name="subject">
+                <option value="Matematika Lanjut">Matematika Lanjut</option>
+                <option value="Biologi">Biologi</option>
+                <option value="Fisika">Fisika</option>
+                <option value="Kimia">Kimia</option>
+                <option value="Ekonomi">Ekonomi</option>
+                <option value="Sosiologi">Sosiologi</option>
+                <option value="Geografi">Geografi</option>
+                <option value="Matematika Dasar">Matematika Dasar</option>
+                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                <option value="Bahasa Inggris">Bahasa Inggris</option>
+                <option value="Bahasa Jawa">Bahasa Jawa</option>
+                <option value="Informatika">Informatika</option>
+                <option value="Sejarah">Sejarah</option>
+                <option value="Mandarin Bisnis">Mandarin Bisnis</option>
+                <option value="Bahasa Mandarin">Bahasa Mandarin</option>
+                <option value="SBK">SBK</option>
+                <option value="BK">BK</option>
+                <option value="PJOK">PJOK</option>
+                <option value="PKWU">PKWU</option>
+                <option value="Agama">Agama</option>
+                <option value="PPKn">PPKn</option>
+            </select>
+
+            <input type="submit" value="Add Task">
+        </form>
+
+        <div class="task-list" id="taskList">
+            <!-- Tasks will be added here dynamically -->
+        </div>
+
+        <!-- Back to Login Page button -->
+        <form action="index.html" method="post">
+            <button class="back-to-login">Back To Menu</button>
+    </div>
+
+    <script>
+        document.getElementById('taskForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get form values
+            var taskName = document.getElementById('taskName').value;
+            var date = document.getElementById('date').value;
+            var remindBefore = document.getElementById('remindBefore').value;
+            var remindTime = document.getElementById('remindTime').value;
+            var notification = document.getElementById('notification').checked;
+            var subject = document.getElementById('subject').value;
+
+            // Create task element
+            var taskElement = document.createElement('div');
+            taskElement.classList.add('task');
+            taskElement.innerHTML = `
+                <p><strong>Task Name:</strong> ${taskName}</p>
+                <p><strong>Date:</strong> ${date}</p>
+                <p><strong>Remind Before (Days):</strong> ${remindBefore}</p>
+                <p><strong>Remind at This Time:</strong> ${remindTime}</p>
+                <p><strong>Remind Via Notification:</strong> ${notification ? 'Yes' : 'No'}</p>
+                <p><strong>Subject:</strong> ${subject}</p>
+                <div class="task-buttons">
+                    <button class="delete" onclick="deleteTask(this)">Delete</button>
+                    <button class="done" onclick="markAsDone(this)">Done</button>
+                </div>
+            `;
+
+            // Add task element to task list
+            document.getElementById('taskList').appendChild(taskElement);
+
+            // Clear form fields
+            document.getElementById('taskForm').reset();
+        });
+
+        function deleteTask(button) {
+            var task = button.parentNode.parentNode;
+            task.remove();
+        }
+
+        function markAsDone(button) {
+            var task = button.parentNode.parentNode;
+            task.style.textDecoration = 'line-through';
+            button.remove();
+        }
+
+        function backToLoginPage(button) {
+            // Redirect to the login page
+            window.location.href = "file:///C:/Users/Theo/Documents/Theo/Login.html"
+        }
+    </script>
+</body>
+</html>
